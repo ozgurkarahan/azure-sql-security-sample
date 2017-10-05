@@ -1,13 +1,14 @@
 # Contoso Clinic Demo Application 
 
 Sample application with database that showcases Auditing and Threat Detection of Azure SQL DB (V12). 
-I have modified the original sample in order to limit the demo to Auditing and Threat Detection of Azure SQL DB. For Original repo Check
+I have modified the original sample in order to limit the demo to Auditing and Threat Detection of Azure SQL DB. For original git hub repository please check
 [azure-sql-security-sample ](https://github.com/Microsoft/azure-sql-security-sample)
 
 ## About this sample
 - **Applies to:**  Azure SQL Database, Azure Web App Service
 - **Programming Language:** .NET C#, T-SQL
-- **Authors:** Daniel Rediske [daredis-msft], [ozkara -msft]
+- **Authors:** Daniel Rediske [daredis-msft]
+- **Modified by:** Ozgur Karahan [ozkara -msft]
 
 ## Contents
 1. [Prerequisites](#prerequisites) 
