@@ -13,7 +13,7 @@ namespace ContosoClinic
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            InitializeAzureKeyVaultProvider();
+            //InitializeAzureKeyVaultProvider();
         }
 
         private static Microsoft.IdentityModel.Clients.ActiveDirectory.ClientCredential _clientCredential;

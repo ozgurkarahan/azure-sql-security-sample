@@ -49,36 +49,6 @@
         "description": "The Azure region in which these resources will be deployed."
       }
     },
-    "userObjectID": {
-      "type": "string",
-      "metadata": {
-        "description": "The user's ID within Azure Active Directory- necessary for AKV integration. Get via powershell command Get-AzureRmADUser "
-      }
-    },
-    "ApplicationObjectId": {
-      "type": "string",
-      "metadata": {
-        "description": "The application's ID within Azure Active Directory- necessary for AKV integration"
-      }
-    },
-    "ClientId": {
-      "type": "string",
-      "metadata": {
-        "description": "The application ID within AAD; See the Generate Application ID and Secret Step in the readme"
-      }
-    },
-    "ActiveDirectoryAppSecret": {
-      "type": "securestring",
-      "metadata": {
-        "description": "The application's secret to allow access to AKV"
-      }
-    },
-    "tenantId": {
-      "type": "string",
-      "metadata": {
-        "description": "Tenant Id of the subscription. Get using Get-AzureRmSubscription cmdlet or Get Subscription API"
-      }
-    },
     "repoUrl": {
       "type": "string"
     },
@@ -97,16 +67,7 @@
     "defaultStorageAccountType": "Standard_LRS",
     "defaultAppServicePlanName": "[concat('contosoplan', uniqueString(resourceGroup().id))]",
     "defaultAppServicePlanSku": "Basic",
-    "defaultAppServicePlanWorkerSize": "0",
-    "defaultKeyVaultName": "[concat('contosoakv', uniqueString(resourceGroup().id))]",
-    "skuName": "Standard",
-    "enableVaultForVolumeEncryption": false,
-    "enableVaultForDeployment": false,
-    "enableVaultforTemplateDeployment": false,
-    "appKeysPermissions": [ "get", "wrapkey", "unwrapkey", "sign", "verify" ],
-    "appSecretPermissions": [ "list", "get" ],
-    "userKeysPermissions": [ "create", "get", "wrapkey", "unwrapkey", "sign", "verify" ],
-    "userSecretPermissions": [ "list", "get" ]
+    "defaultAppServicePlanWorkerSize": "0"
   },
   "resources": [
     {
@@ -191,40 +152,6 @@
       }
     },
     {
-      "type": "Microsoft.KeyVault/vaults",
-      "name": "[variables('defaultKeyVaultName')]",
-      "apiVersion": "2015-06-01",
-      "location": "[parameters('location')]",
-      "properties": {
-        "enabledForDeployment": "[variables('enableVaultForDeployment')]",
-        "enabledForTemplateDeployment": "[variables('enableVaultforTemplateDeployment')]",
-        "enabledForVolumeEncryption": "[variables('enableVaultForVolumeEncryption')]",
-        "tenantId": "[parameters('tenantId')]",
-        "accessPolicies": [
-          {
-            "tenantId": "[parameters('tenantId')]",
-            "objectId": "[parameters('ApplicationObjectId')]",
-            "permissions": {
-              "keys": "[variables('appKeysPermissions')]",
-              "secrets": "[variables('appSecretPermissions')]"
-            }
-          },
-          {
-            "tenantId": "[parameters('tenantId')]",
-            "objectId": "[parameters('userObjectID')]",
-            "permissions": {
-              "keys": "[variables('userKeysPermissions')]",
-              "secrets": "[variables('userSecretPermissions')]"
-            }
-          }
-        ],
-        "sku": {
-          "name": "[variables('skuName')]",
-          "family": "A"
-        }
-      }
-    },
-    {
       "apiVersion": "2014-06-01",
       "name": "[variables('defaultAppServicePlanName')]",
       "type": "Microsoft.Web/serverfarms",
@@ -268,9 +195,7 @@
             "administratorLogin": "[parameters('administratorLogin')]",
             "administratorLoginPassword": "[parameters('administratorLoginPassword')]",
             "applicationLogin": "[parameters('applicationLogin')]",
-            "applicationLoginPassword": "[parameters('applicationLoginPassword')]",
-            "applicationADID": "[parameters('ClientId')]",
-            "applicationADSecret": "[parameters('ActiveDirectoryAppSecret')]"
+            "applicationLoginPassword": "[parameters('applicationLoginPassword')]"
           }
         },
         {
