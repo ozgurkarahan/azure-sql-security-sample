@@ -7,7 +7,7 @@ I have modified the original sample in order to limit the demo to Auditing and T
 ## About this sample
 - **Applies to:**  Azure SQL Database, Azure Web App Service
 - **Programming Language:** .NET C#, T-SQL
-- **Authors:** Daniel Rediske [daredis-msft]
+- **Authors:** Daniel Rediske [daredis-msft], [ozkara -msft]
 
 ## Contents
 1. [Prerequisites](#prerequisites) 
